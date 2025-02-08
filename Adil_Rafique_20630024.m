@@ -107,3 +107,71 @@ fprintf('The range of electromagnetic frequencies are %.2f Hz and %.2fHz.\n',low
 
 %% Q4 - EXAMPLES [12 MARKS]
 clear
+
+% a) 
+% Clear removes the variables that are stored in the memory.
+
+% b)
+% Who shows a list of all the variables that are in the current workspace.
+
+% c) 
+% A semicolon after a line prevents the code in that line from being
+% displayed.
+
+% d)
+% Sound plays the sound relating to a vector with a specific sampling rate.
+
+% e)
+% Roots finds the roots of a polynomial when given the coefficients.
+
+% f)
+% Abs finds the absolute value of a number or an array. 
+
+%% Q5 - PROGRAM FLOW [12 MARKS]
+clear,clc,clearvars
+
+% a) Flowchart done in different program
+
+% b and c) 
+
+%Variables
+
+initialHeight = 10000;
+time = 0;
+velocity = 200;
+timeInterval = 2;
+
+height = initialHeight;
+
+parachuteDeployment = false;
+
+%Height Verification 
+
+while height >= 0
+
+    %Loop to activate parachute
+
+    if height <= 2700 && ~parachuteDeployment
+        disp('Parachute Deployed');
+        disp(['Time elapsed before parachute deployment: ', num2str(time), ' seconds']);
+        parachuteDeployment = true;
+    end
+    
+    %Loop to activate transponder beacon
+
+    if height <= 0
+        disp('Transponder Beacon Activated');
+        break;
+    end
+    
+    %Decreasing the height per time interval
+
+    height = height - velocity * timeInterval;
+
+    %Increasing the time interval
+
+    time = time + timeInterval;
+
+end
+
+
