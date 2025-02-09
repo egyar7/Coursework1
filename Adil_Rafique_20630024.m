@@ -9,16 +9,22 @@ x = 1.5;
 
 % a)
 a = sin(2*x);
+
 % b)
 b = sin(x)^2;
+
 % c)
 c = x^5 + 3*x^4 + x^3 + (x^2)/2 + x;
+
 % d)
 d = exp(sin(x)*cos(x));
+
 % e)
 e = (x + 1)*(x-1)*((x^2) + 1)*(x^3);
+
 % f)
 f = a + 2*b;
+
 % g)
 g = (f/(c + e))^2;
 
@@ -30,15 +36,20 @@ x = linspace(-2*pi,2*pi,100);
 
 % a)
 a = sin(x);
+
 % b)
 b = cos(x).^2;
+
 % c)
 c = tan(x);
+
 % d)
 d = sinh(x);
+
 % e)
 average = mean(b); 
 standardDeviation = std(b);
+
 % f) 
 % The mean is not exactly 5 because only 100 values were taken and
 % approximated. Using 100 points to approximate the value of the continuous 
@@ -69,14 +80,13 @@ fprintf('The average power is %.4f Watts\n',averagePower)
 clear
 
 % a)
-%polynomial = 24*x^2 - 24*x - 480;
 
-%Defining the coefficients
+%Defining the polynomial coefficients
 a = 24;
 b = -24;
 c = -480;
 
-%Substitution into quadratic formula to find roots.
+%Substitution into quadratic formula to find roots
 x1 = (-b+sqrt(b^2-4*a*c))/(2*a);
 x2 = (-b-sqrt(b^2-4*a*c))/(2*a);
 
@@ -132,7 +142,7 @@ clear,clc,clearvars
 
 % a) Flowchart done in different program
 
-% b and c) 
+% b) and c) 
 
 %Variables
 
@@ -141,8 +151,10 @@ time = 0;
 velocity = 200;
 timeInterval = 2;
 
+%Setting the initial height
 height = initialHeight;
 
+%Setting the parachute deployment to false
 parachuteDeployment = false;
 
 %Height Verification 
@@ -189,8 +201,8 @@ disp('Location - Nottingam')
 disp(' ')
 
 %Loop that displays the weather information
-%(Pulls a value from the next column in each array after every run)
-%(until each value in the array has been used.)
+%(Pulls the next value in each array after every run until each value in the array has been used.)
+
 n = 1;
 while n <= length(time)
     statement = sprintf('Time\t\t%d\nTemperature\t%d C\nHumidity\t%d%%\nUV level\t%d\n', ...
@@ -201,14 +213,14 @@ end
 
 disp('Data logging terminated')
 
-%The limitation is that the data has to be input into the code for it to be
-%displayed. This means that it cannot get realtime weather information
-%unless it is constantly input into the code. To improve the program, the
-%weather data should be input automatically from the sensors into the
-%code by reading data provided by the sensors.
+% The limitation is that the data has to be input into the code for it to be
+% displayed. This means that it cannot get realtime weather information
+% unless it is constantly input into the code. To improve the program, the
+% weather data should be input automatically from the sensors into the
+% code by reading data provided by the sensors.
 
 %% Q7 - FOR LOOPS AND DISPLAYING DATA [16 MARKS]
-clear,clc,clearvars
+clear, clc, clearvars
 
 %Defining number of terms
 numberOfTerms = 50;
@@ -250,11 +262,63 @@ for n = 1:50
     end
 end
 
-%Part d stops the loop when the golden ratio converges. This removes
-%unnecessary outputs and makes the code more efficient. It also reduces the
-%amount of memory used and increases the performance/speed at which the
-%program is completed.
+% Part d stops the loop when the golden ratio converges. This removes
+% unnecessary outputs and makes the code more efficient. It also reduces the
+% amount of memory used and increases the performance/speed at which the
+% program is completed.
 
 %% Q8 - USING THE SWITCH STATEMENT [10 MARKS]
-clear
+clear, clc, clearvars
 
+%Input Statement
+poundsToConvert = input('How many pounds would you like to convert? ','s');
+
+%While Loop to check input is valid.
+while ~CheckIsNumber(poundsToConvert)
+    fprintf('You can only enter valid amounts (Must be positive and without a £ sign).  Please try again\n');
+    poundsToConvert = input('How many pounds would you like to convert? ','s');
+end
+
+%Converting input string to a double
+poundsToConvert = str2double(poundsToConvert);
+
+%Conversion Rates
+euro = 1.17;
+usDollars = 1.27;
+chineseYuan = 9.03;
+swissFrancs = 1.09;
+
+%Defining the conversion table with available selections
+conversionTable = menu('Select the currency to convert to', 'Euro', 'US Dollar', 'Chinese Yuan', 'Swiss Francs', 'Quit');
+
+%Creating the switch for the conversion table with the respective
+%conversion rates.
+switch conversionTable
+
+    case 1
+        convertedAmount = poundsToConvert * euro;
+        fprintf('%.2f Pounds is equal to %.2f Euros.\n',poundsToConvert,convertedAmount);
+   
+    case 2
+        convertedAmount = poundsToConvert * usDollars;
+        fprintf('%.2f Pounds is equal to %.2f US Dollars.\n',poundsToConvert,convertedAmount);
+
+    case 3
+        convertedAmount = poundsToConvert * chineseYuan;
+        fprintf('%.2f Pounds is equal to %.2f Chinese Yuan.\n',poundsToConvert,convertedAmount);
+
+    case 4
+        convertedAmount = poundsToConvert * swissFrancs;
+        fprintf('%.2f Pounds is equal to %.2f Swiss Francs.\n',poundsToConvert,convertedAmount);
+
+        %Option to exit the converter without converting anything
+    case 5
+        disp('Exiting the currency converter.')
+
+end
+
+%Function to check input is valid (must be a real number > 0)
+function CheckPounds = CheckIsNumber(Value)
+   Number = str2double(Value);
+   CheckPounds = ~isnan(Number) && isreal(Number) && Number>0;
+end
