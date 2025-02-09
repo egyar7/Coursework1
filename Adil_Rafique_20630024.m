@@ -174,4 +174,87 @@ while height >= 0
 
 end
 
+%% Q6 FORMAT AND PRINT TEXT TO SCREEN AND LOOPS [13 MARKS]
+clear,clc,clearvars
+
+%Defining arrays
+time = [1300 , 1600 , 1900];
+temperature = [19 , 20 , 18];
+humidity = [55 , 49 , 59];
+uvLevel = [4 , 2 , 1];
+
+%Displaying the date and location
+disp('Data logging initiatied - 27/7/2023')
+disp('Location - Nottingam')
+disp(' ')
+
+%Loop that displays the weather information
+%(Pulls a value from the next column in each array after every run)
+%(until each value in the array has been used.)
+n = 1;
+while n <= length(time)
+    statement = sprintf('Time\t\t%d\nTemperature\t%d C\nHumidity\t%d%%\nUV level\t%d\n', ...
+        time(n),temperature(n),humidity(n),uvLevel(n));
+    disp(statement);
+    n = n+1;
+end
+
+disp('Data logging terminated')
+
+%The limitation is that the data has to be input into the code for it to be
+%displayed. This means that it cannot get realtime weather information
+%unless it is constantly input into the code. To improve the program, the
+%weather data should be input automatically from the sensors into the
+%code by reading data provided by the sensors.
+
+%% Q7 - FOR LOOPS AND DISPLAYING DATA [16 MARKS]
+clear,clc,clearvars
+
+%Defining number of terms
+numberOfTerms = 50;
+
+%Preallocating array for the fibonacci sequence
+fibonacci = zeros(1,numberOfTerms);
+
+%Setting the first and second term of the fibonacci sequence
+fibonacci(1) = 0;
+fibonacci(2) = 1;
+
+%Preallocating array for the golden ratio
+goldenRatio = zeros(1,numberOfTerms);
+
+%For loop to generate fibonacci sequence and golden ratio
+for n = 3:numberOfTerms
+    fibonacci(n) = fibonacci(n-1) + fibonacci(n-2);
+    goldenRatio(n) = fibonacci(n)/fibonacci(n-1);
+end
+
+%Statement and headings for the table of values.
+fprintf('Fibonacci sequence and approximations to the golden ratio:\n');
+fprintf('%-5s %-20s %-20s\n', 'Index', 'Fibonacci Number', 'Golden Ratio');
+
+%For loop to display the fibonacci sequence and corresponding golden ratio.
+for n = 1:50
+    if n > 1
+        fprintf('%-5d %-20d %-20.5f\n', n, fibonacci(n), goldenRatio(n));
+    else
+        
+        %First golden ratio cannot be calculated so 'N/A' must display.
+        fprintf('%-5d %-20d %-20s\n', n, fibonacci(n), 'N/A');
+    end
+    
+    %Convergence function to end loop when golden ratios are within 0.1%.
+    if n > 1 && abs((goldenRatio(n)-goldenRatio(n-1))/goldenRatio(n-1)) <= 0.001
+        disp('Golden ratio converged to within 0.1%');
+        break;
+    end
+end
+
+%Part d stops the loop when the golden ratio converges. This removes
+%unnecessary outputs and makes the code more efficient. It also reduces the
+%amount of memory used and increases the performance/speed at which the
+%program is completed.
+
+%% Q8 - USING THE SWITCH STATEMENT [10 MARKS]
+clear
 
